@@ -11,6 +11,7 @@ const HappyPack = require("happypack")
 const os = require("os")
 const HappyThreadPool = HappyPack.ThreadPool({size:os.cpus().length})
 const CopyWebpackPlugin = require("copy-webpack-plugin")
+const Webpack = require("webpack")
 module.exports = {
   entry:["@babel/polyfill",path.resolve(__dirname,"../src/main.js")],
   // {
@@ -162,9 +163,9 @@ module.exports = {
       ],
       threadPool:HappyThreadPool
     }),
-    new webpack.DllReferencePlugin({
+    new Webpack.DllReferencePlugin({
       context:__dirname,
-      manifest:require("./vendor-mainfest.json")
+      manifest:require("./vendor-manifest.json")
     }),
     new CopyWebpackPlugin([{
       from:"static",to:"static"
